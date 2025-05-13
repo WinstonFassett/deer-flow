@@ -12,7 +12,11 @@ export async function* fetchStream(
     headers: {
       "Content-Type": "application/json",
       "Cache-Control": "no-cache",
+      "Connection": "keep-alive",
     },
+    mode: "cors",
+    credentials: "include",
+    keepalive: true,
     ...init,
   });
   if (response.status !== 200) {
