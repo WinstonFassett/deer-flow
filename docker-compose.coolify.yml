@@ -49,9 +49,6 @@ services:
       dockerfile: Dockerfile
       args:
        - NEXT_PUBLIC_API_URL=${SERVICE_URL_API}
-      # Log the variable that's being passed to the build
-      command: |
-        echo "SERVICE_FQDN_API value being passed: ${SERVICE_URL_API}"     
     environment:
       - SERVICE_FQDN_APP_3000
       - PORT=3000
