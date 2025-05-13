@@ -23,9 +23,8 @@ services:
             base_url: ${BASIC_MODEL_BASE_URL}
             model: ${BASIC_MODEL_NAME}
             api_key: ${BASIC_MODEL_API_KEY}
-    exclude_from_hc: true
     healthcheck:
-      test: ["CMD", "curl", "-s", "http://localhost:8000", "||", "exit", "1"]
+      test: ["CMD-SHELL", "curl -s -o /dev/null http://localhost:8000; if [ $? -eq 7 ] || [ $? -eq 28 ]; then exit 1; fi"]
       interval: 30s
       timeout: 10s
       retries: 3
