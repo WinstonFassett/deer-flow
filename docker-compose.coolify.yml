@@ -45,7 +45,7 @@ services:
       api:
         condition: service_healthy
     healthcheck:
-      test: ["CMD-SHELL", "/nodejs/bin/node -e \"try { var hostname = require('os').hostname(); require('http').get({hostname: hostname, port: 3000, path: '/', timeout: 2000}, (res) => { process.exit(res.statusCode >= 200 && res.statusCode < 400 ? 0 : 1); }).on('error', (e) => { console.error(e.message); process.exit(1); }).end(); } catch(e) { console.error(e); process.exit(1); }\""]
+      test: ["CMD", "/nodejs/bin/node", "-e", "try { var hostname = require('os').hostname(); require('http').get({hostname: hostname, port: 3000, path: '/', timeout: 2000}, (res) => { process.exit(res.statusCode >= 200 && res.statusCode < 400 ? 0 : 1); }).on('error', (e) => { console.error(e.message); process.exit(1); }).end(); } catch(e) { console.error(e); process.exit(1); }"]
       interval: 30s
       timeout: 10s
       retries: 3
