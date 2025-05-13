@@ -23,6 +23,7 @@ services:
             base_url: ${BASIC_MODEL_BASE_URL}
             model: ${BASIC_MODEL_NAME}
             api_key: ${BASIC_MODEL_API_KEY}
+    exclude_from_hc: true
     # healthcheck:
     #   test: ["CMD", "curl", "-s", "http://localhost:8000", "||", "exit", "1"]
     #   interval: 30s
