@@ -4,6 +4,7 @@ services:
       context: .
       dockerfile: Dockerfile
     environment:
+      - SERVICE_FQDN_API_8000
       - PORT=8000
       - DEBUG=${DEBUG:-True}
       - APP_ENV=${APP_ENV:-development}
@@ -14,7 +15,6 @@ services:
       - BASIC_MODEL_BASE_URL=${BASIC_MODEL_BASE_URL:-https://api.openai.com/v1}
       - BASIC_MODEL_NAME=${BASIC_MODEL_NAME:-gpt-4o}
       - BASIC_MODEL_API_KEY=${BASIC_MODEL_API_KEY}
-      - SERVICE_FQDN_API_8000
     volumes:
       - type: bind
         target: /app/conf.yaml
@@ -48,11 +48,11 @@ services:
       context: ./web
       dockerfile: Dockerfile
       args:
-       - NEXT_PUBLIC_API_URL=${SERVICE_FQDN_API_8000}      
+       - NEXT_PUBLIC_API_URL=${SERVICE_FQDN_API}      
     environment:
-      - PORT=3000
-      - NEXT_PUBLIC_API_URL=${SERVICE_FQDN_API_8000}
       - SERVICE_FQDN_APP_3000
+      - PORT=3000
+      - NEXT_PUBLIC_API_URL=${SERVICE_FQDN_API}
     depends_on:
       api:
         condition: service_healthy
