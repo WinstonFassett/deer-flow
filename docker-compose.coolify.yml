@@ -37,7 +37,7 @@ services:
       context: ./web
       dockerfile: Dockerfile
       args:
-       - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}      
+       - NEXT_PUBLIC_API_URL=${SERVICE_FQDN_API_8000}      
     environment:
       - NEXT_PUBLIC_API_URL=${SERVICE_FQDN_API_8000}
       - SERVICE_FQDN_APP_3000
