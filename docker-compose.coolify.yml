@@ -4,6 +4,7 @@ services:
       context: .
       dockerfile: Dockerfile
     environment:
+      - PORT=8000
       - DEBUG=${DEBUG:-True}
       - APP_ENV=${APP_ENV:-development}
       - SEARCH_API=${SEARCH_API:-tavily}
@@ -49,6 +50,7 @@ services:
       args:
        - NEXT_PUBLIC_API_URL=${SERVICE_FQDN_API_8000}      
     environment:
+      - PORT=3000
       - NEXT_PUBLIC_API_URL=${SERVICE_FQDN_API_8000}
       - SERVICE_FQDN_APP_3000
     depends_on:
