@@ -15,7 +15,6 @@ export async function* fetchStream(
       "Connection": "keep-alive",
     },
     mode: "cors",
-    credentials: "include",
     keepalive: true,
     ...init,
   });
