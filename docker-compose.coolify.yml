@@ -29,8 +29,8 @@ services:
       timeout: 10s
       retries: 3
     restart: unless-stopped
-    labels:
-      - traefik.http.middlewares.authentik-auth@file     
+    # labels:
+    #   - traefik.http.middlewares.authentik-auth@file     
 
   app:
     build:
@@ -48,5 +48,5 @@ services:
       timeout: 10s
       retries: 3
     restart: unless-stopped
-    labels:
-      - traefik.http.middlewares.authentik-auth@file
+    # labels:
+    #   - traefik.http.middlewares.authentik-auth@file
