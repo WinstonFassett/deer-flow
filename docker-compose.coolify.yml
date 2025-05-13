@@ -23,11 +23,11 @@ services:
             base_url: ${BASIC_MODEL_BASE_URL}
             model: ${BASIC_MODEL_NAME}
             api_key: ${BASIC_MODEL_API_KEY}
-    healthcheck:
-      test: ["CMD", "curl", "-s", "http://localhost:8000", "||", "exit", "1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
+    # healthcheck:
+    #   test: ["CMD", "curl", "-s", "http://localhost:8000", "||", "exit", "1"]
+    #   interval: 30s
+    #   timeout: 10s
+    #   retries: 3
     restart: unless-stopped
     # labels:
     #   - traefik.http.middlewares.authentik-auth@file     
