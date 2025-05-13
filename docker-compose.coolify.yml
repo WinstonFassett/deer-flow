@@ -29,8 +29,18 @@ services:
       timeout: 10s
       retries: 3
     restart: unless-stopped
-    # labels:
-    #   - traefik.http.middlewares.authentik-auth@file     
+    labels:
+      - traefik.enable=true
+      # Define CORS middleware
+      - traefik.http.middlewares.cors-headers.headers.accesscontrolallowmethods=GET,OPTIONS,PUT,POST,DELETE,PATCH
+      - traefik.http.middlewares.cors-headers.headers.accesscontrolallowheaders=*
+      - traefik.http.middlewares.cors-headers.headers.accesscontrolalloworiginlist=*
+      - traefik.http.middlewares.cors-headers.headers.accesscontrolmaxage=100
+      - traefik.http.middlewares.cors-headers.headers.addvaryheader=true
+      # Apply the middleware to all routers for this service
+      - traefik.http.routers.api-${COOLIFY_RESOURCE_UUID}.middlewares=cors-headers@docker
+      # Also apply to the https router that Coolify generates
+      - traefik.http.routers.https-0-${COOLIFY_RESOURCE_UUID}-api.middlewares=cors-headers@docker
 
   app:
     build:
@@ -50,5 +60,15 @@ services:
       timeout: 10s
       retries: 3
     restart: unless-stopped
-    # labels:
-    #   - traefik.http.middlewares.authentik-auth@file
+    labels:
+      - traefik.enable=true
+      # We can reuse the same middleware for both services
+      - traefik.http.middlewares.cors-headers.headers.accesscontrolallowmethods=GET,OPTIONS,PUT,POST,DELETE,PATCH
+      - traefik.http.middlewares.cors-headers.headers.accesscontrolallowheaders=*
+      - traefik.http.middlewares.cors-headers.headers.accesscontrolalloworiginlist=*
+      - traefik.http.middlewares.cors-headers.headers.accesscontrolmaxage=100
+      - traefik.http.middlewares.cors-headers.headers.addvaryheader=true
+      # Apply the middleware to all routers for this service
+      - traefik.http.routers.app-${COOLIFY_RESOURCE_UUID}.middlewares=cors-headers@docker
+      # Also apply to the https router that Coolify generates
+      - traefik.http.routers.https-0-${COOLIFY_RESOURCE_UUID}-app.middlewares=cors-headers@docker
