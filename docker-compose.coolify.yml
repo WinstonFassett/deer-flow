@@ -48,11 +48,11 @@ services:
       context: ./web
       dockerfile: Dockerfile
       args:
-       - NEXT_PUBLIC_API_URL=${SERVICE_URL_API}
+       - NEXT_PUBLIC_API_URL=${SERVICE_FQDN_API_8000}
     environment:
       - SERVICE_FQDN_APP_3000
       - PORT=3000
-      - NEXT_PUBLIC_API_URL=${SERVICE_URL_API}
+      - NEXT_PUBLIC_API_URL=${SERVICE_FQDN_API_8000}
     depends_on:
       api:
         condition: service_healthy
