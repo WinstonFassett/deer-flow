@@ -32,6 +32,7 @@ services:
     restart: unless-stopped
     labels:
       - traefik.enable=true
+      - traefik.http.middlewares.authentik-auth@file
       # Define CORS middleware
       - traefik.http.middlewares.cors-headers.headers.accesscontrolallowmethods=GET,OPTIONS,PUT,POST,DELETE,PATCH
       - traefik.http.middlewares.cors-headers.headers.accesscontrolallowheaders=*
@@ -64,6 +65,7 @@ services:
     restart: unless-stopped
     labels:
       - traefik.enable=true
+      - traefik.http.middlewares.authentik-auth@file
       # We can reuse the same middleware for both services
       - traefik.http.middlewares.cors-headers.headers.accesscontrolallowmethods=GET,OPTIONS,PUT,POST,DELETE,PATCH
       - traefik.http.middlewares.cors-headers.headers.accesscontrolallowheaders=*
