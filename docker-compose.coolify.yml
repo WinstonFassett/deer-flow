@@ -21,9 +21,9 @@ services:
         source: ./conf.yaml.example
         content: |
           BASIC_MODEL:
-            base_url: ${BASIC_MODEL_BASE_URL}
-            model: ${BASIC_MODEL_NAME}
-            api_key: ${BASIC_MODEL_API_KEY}
+            base_url: "`echo $BASIC_MODEL_BASE_URL`"
+            model: "`echo $BASIC_MODEL_NAME`"
+            api_key: "`echo $BASIC_MODEL_API_KEY`"
     healthcheck:
       test: ["CMD-SHELL", "curl -s -o /dev/null http://localhost:8000; if [ $? -eq 7 ] || [ $? -eq 28 ]; then exit 1; fi"]
       interval: 30s
